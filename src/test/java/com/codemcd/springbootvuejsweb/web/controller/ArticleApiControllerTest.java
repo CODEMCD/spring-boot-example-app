@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 public class ArticleApiControllerTest {
+    private static final String LOCATION = "Location";
 
     @Autowired
     private WebTestClient webTestClient;
@@ -35,11 +36,13 @@ public class ArticleApiControllerTest {
                 .exchange()
                 .expectStatus().isCreated()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectHeader().valueMatches(LOCATION, "/articles/d")
                 .expectBody(ArticleResponseDto.class)
                 .returnResult()
                 .getResponseBody()
         ;
 
+        assert articleResponseDto != null;
         assertThat(articleResponseDto.getId()).isEqualTo(1L);
         assertThat(articleResponseDto.getAuthor()).isEqualTo(author);
         assertThat(articleResponseDto.getTitle()).isEqualTo(title);
