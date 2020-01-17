@@ -1,7 +1,7 @@
 package com.codemcd.springbootvuejsweb.web.controller;
 
-import com.codemcd.springbootvuejsweb.dto.ArticleRequestDto;
-import com.codemcd.springbootvuejsweb.dto.ArticleResponseDto;
+import com.codemcd.springbootvuejsweb.service.dto.ArticleRequestDto;
+import com.codemcd.springbootvuejsweb.service.dto.ArticleResponseDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class ArticleApiControllerTest {
                 .exchange()
                 .expectStatus().isCreated()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectHeader().valueMatches(LOCATION, "/articles/d")
+                .expectHeader().valueMatches(LOCATION, "\\/articles\\/\\d")
                 .expectBody(ArticleResponseDto.class)
                 .returnResult()
                 .getResponseBody()

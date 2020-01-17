@@ -1,20 +1,14 @@
-package com.codemcd.springbootvuejsweb.dto;
+package com.codemcd.springbootvuejsweb.service.dto;
 
-public class ArticleResponseDto {
-    private Long id;
+public class ArticleRequestDto {
     private String author;
     private String title;
     private String contents;
 
-    public ArticleResponseDto(Long id, String author, String title, String contents) {
-        this.id = id;
+    public ArticleRequestDto(String author, String title, String contents) {
         this.author = author;
         this.title = title;
         this.contents = contents;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getAuthor() {
