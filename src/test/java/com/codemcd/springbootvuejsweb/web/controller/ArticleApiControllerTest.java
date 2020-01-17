@@ -22,13 +22,14 @@ public class ArticleApiControllerTest {
     private WebTestClient webTestClient;
 
     @Test
-    @DisplayName("게시글을 정상적으로 생성한다.")
-    void create_article() {
+    @DisplayName("게시글을 정상적으로 생성, 조회, 수정, 삭제한다.")
+    void CRUD() {
         String author = "park";
         String title = "안녕하세요.";
         String contents = "반갑습니다.";
         ArticleRequestDto articleRequestDto = new ArticleRequestDto(author, title, contents);
 
+        // 게시글 생성
         ArticleResponseDto articleResponseDto = webTestClient.post().uri("/api/articles")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -47,5 +48,18 @@ public class ArticleApiControllerTest {
         assertThat(articleResponseDto.getAuthor()).isEqualTo(author);
         assertThat(articleResponseDto.getTitle()).isEqualTo(title);
         assertThat(articleResponseDto.getContents()).isEqualTo(contents);
+
+        // 게시글 조회(전체 게시글 조회)
+        webTestClient.get().uri("/api/articles")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody()
+                .jsonPath("$..id").isEqualTo(1)
+                .jsonPath("$..author").isEqualTo(author)
+                .jsonPath("$..title").isEqualTo(title)
+                .jsonPath("$..contents").isEqualTo(contents)
+                ;
     }
 }

@@ -7,6 +7,9 @@ import com.codemcd.springbootvuejsweb.service.dto.ArticleResponseDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ArticleService {
     private ArticleRepository articleRepository;
@@ -27,5 +30,15 @@ public class ArticleService {
                 savedArticle.getAuthor(),
                 savedArticle.getTitle(),
                 savedArticle.getContents());
+    }
+
+    public List<ArticleResponseDto> showAll() {
+        List<Article> articles = articleRepository.findAll();
+
+        return articles.stream()
+                .map(article -> new ArticleResponseDto(article.getId(), article.getAuthor(),
+                        article.getTitle(), article.getContents()))
+                .collect(Collectors.toList())
+                ;
     }
 }

@@ -4,11 +4,13 @@ import com.codemcd.springbootvuejsweb.service.ArticleService;
 import com.codemcd.springbootvuejsweb.service.dto.ArticleRequestDto;
 import com.codemcd.springbootvuejsweb.service.dto.ArticleResponseDto;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 public class ArticleApiController {
@@ -21,8 +23,16 @@ public class ArticleApiController {
     @PostMapping("/api/articles")
     public ResponseEntity create(@RequestBody ArticleRequestDto articleRequestDto) {
         ArticleResponseDto createdArticle = articleService.create(articleRequestDto);
+
         return ResponseEntity
                 .created(URI.create("/articles/" + createdArticle.getId()))
                 .body(createdArticle);
+    }
+
+    @GetMapping("/api/articles")
+    public ResponseEntity showAll() {
+        List<ArticleResponseDto> articles = articleService.showAll();
+
+        return ResponseEntity.ok(articles);
     }
 }

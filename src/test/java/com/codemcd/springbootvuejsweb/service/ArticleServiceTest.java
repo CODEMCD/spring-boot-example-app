@@ -11,6 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -37,5 +40,18 @@ public class ArticleServiceTest {
         ArticleResponseDto articleResponseDto = articleService.create(articleRequestDto);
 
         assertThat(articleResponseDto).isNotNull();
+    }
+
+    @Test
+    @DisplayName("전체 게시글을 보여준다.")
+    void show_all_articles() {
+        Article article1 = new Article("park", "Hello", "Nice to meet you");
+        Article article2 = new Article("kim", "Hello", "Nice to meet you");
+
+        given(articleRepository.findAll()).willReturn(Arrays.asList(article1, article2));
+
+        List<ArticleResponseDto> responseArticles = articleService.showAll();
+
+        assertThat(responseArticles).hasSize(2);
     }
 }
