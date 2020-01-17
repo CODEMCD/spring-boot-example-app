@@ -32,6 +32,7 @@ public class ArticleService {
                 savedArticle.getContents());
     }
 
+    @Transactional(readOnly = true)
     public List<ArticleResponseDto> showAll() {
         List<Article> articles = articleRepository.findAll();
 
@@ -40,5 +41,20 @@ public class ArticleService {
                         article.getTitle(), article.getContents()))
                 .collect(Collectors.toList())
                 ;
+    }
+
+    @Transactional
+    public ArticleResponseDto update(Long articleId, ArticleRequestDto articleUpdateRequestDto) {
+        Article sourceArticle = articleRepository.findById(articleId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다."));
+        Article targetArticle = new Article(articleUpdateRequestDto.getAuthor(),
+                articleUpdateRequestDto.getTitle(), articleUpdateRequestDto.getContents());
+
+        sourceArticle.update(targetArticle);
+
+        return new ArticleResponseDto(sourceArticle.getId(),
+                sourceArticle.getAuthor(),
+                sourceArticle.getTitle(),
+                sourceArticle.getContents());
     }
 }

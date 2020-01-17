@@ -30,6 +30,11 @@ public class Article {
         this.contents = contents;
     }
 
+    public void update(Article another) {
+        this.title = another.title;
+        this.contents = another.contents;
+    }
+
     public Long getId() {
         return id;
     }

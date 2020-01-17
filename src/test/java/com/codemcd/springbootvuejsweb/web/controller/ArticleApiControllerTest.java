@@ -61,5 +61,25 @@ public class ArticleApiControllerTest {
                 .jsonPath("$..title").isEqualTo(title)
                 .jsonPath("$..contents").isEqualTo(contents)
                 ;
+
+        // 게시글 수정
+        ArticleRequestDto updateArticleRequest = new ArticleRequestDto(author, "hi", "bye");
+        ArticleResponseDto updatedArticleResponse = webTestClient.put().uri("/api/articles/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(Mono.just(updateArticleRequest), ArticleRequestDto.class)
+                .exchange()
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody(ArticleResponseDto.class)
+                .returnResult()
+                .getResponseBody()
+                ;
+
+        assert updatedArticleResponse != null;
+        assertThat(updatedArticleResponse.getId()).isEqualTo(1L);
+        assertThat(updatedArticleResponse.getAuthor()).isEqualTo(author);
+        assertThat(updatedArticleResponse.getTitle()).isEqualTo("hi");
+        assertThat(updatedArticleResponse.getContents()).isEqualTo("bye");
     }
 }

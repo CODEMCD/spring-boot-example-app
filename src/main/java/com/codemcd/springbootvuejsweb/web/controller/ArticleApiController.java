@@ -4,10 +4,7 @@ import com.codemcd.springbootvuejsweb.service.ArticleService;
 import com.codemcd.springbootvuejsweb.service.dto.ArticleRequestDto;
 import com.codemcd.springbootvuejsweb.service.dto.ArticleResponseDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
@@ -34,5 +31,13 @@ public class ArticleApiController {
         List<ArticleResponseDto> articles = articleService.showAll();
 
         return ResponseEntity.ok(articles);
+    }
+
+    @PutMapping("/api/articles/{articleId}")
+    public ResponseEntity update(@PathVariable("articleId") Long articleId,
+                                 @RequestBody ArticleRequestDto articleUpdateRequestDto) {
+        ArticleResponseDto updatedArticle = articleService.update(articleId, articleUpdateRequestDto);
+
+        return ResponseEntity.ok(updatedArticle);
     }
 }

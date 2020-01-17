@@ -27,13 +27,13 @@ public class ArticleServiceTest {
     @Mock
     private ArticleRepository articleRepository;
 
+    private ArticleRequestDto articleRequestDto = new ArticleRequestDto("park",
+            "Hello",
+            "Nice to meet you.");
+
     @Test
     @DisplayName("게시글을 레포지토리에 정상적으로 저장한다.")
     void create_article() {
-        ArticleRequestDto articleRequestDto = new ArticleRequestDto("park",
-                "Hello",
-                "Nice to meet you.");
-
         given(articleRepository.save(any())).willReturn(new Article(articleRequestDto.getAuthor(),
                 articleRequestDto.getTitle(), articleRequestDto.getContents()));
 
