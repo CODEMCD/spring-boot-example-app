@@ -1,6 +1,7 @@
 package com.codemcd.springbootvuejsweb.domain;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ARTICLES")
@@ -43,5 +44,18 @@ public class Article {
 
     public String getContents() {
         return contents;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Article)) return false;
+        Article article = (Article) o;
+        return getId().equals(article.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
