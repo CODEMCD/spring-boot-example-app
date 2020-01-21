@@ -57,4 +57,12 @@ public class ArticleService {
                 sourceArticle.getTitle(),
                 sourceArticle.getContents());
     }
+
+    @Transactional
+    public void delete(Long articleId) {
+        Article deleteArticle = articleRepository.findById(articleId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다."));
+
+        articleRepository.delete(deleteArticle);
+    }
 }

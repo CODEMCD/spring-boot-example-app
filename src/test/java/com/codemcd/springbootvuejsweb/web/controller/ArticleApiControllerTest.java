@@ -81,5 +81,13 @@ public class ArticleApiControllerTest {
         assertThat(updatedArticleResponse.getAuthor()).isEqualTo(author);
         assertThat(updatedArticleResponse.getTitle()).isEqualTo("hi");
         assertThat(updatedArticleResponse.getContents()).isEqualTo("bye");
+
+        // 게시글 삭제
+        webTestClient.delete().uri("/api/articles/1")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus()
+                .isOk()
+                ;
     }
 }

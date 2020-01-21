@@ -13,13 +13,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class ArticleServiceTest {
+    private static final Long ARTICLE_ID = 1L;
 
     @InjectMocks
     private ArticleService articleService;
@@ -34,8 +37,9 @@ public class ArticleServiceTest {
     @Test
     @DisplayName("게시글을 레포지토리에 정상적으로 저장한다.")
     void create_article() {
-        given(articleRepository.save(any())).willReturn(new Article(articleRequestDto.getAuthor(),
-                articleRequestDto.getTitle(), articleRequestDto.getContents()));
+        Article article = new Article(articleRequestDto.getAuthor(),
+                articleRequestDto.getTitle(), articleRequestDto.getContents());
+        given(articleRepository.save(any())).willReturn(article);
 
         ArticleResponseDto articleResponseDto = articleService.create(articleRequestDto);
 
@@ -53,5 +57,33 @@ public class ArticleServiceTest {
         List<ArticleResponseDto> responseArticles = articleService.showAll();
 
         assertThat(responseArticles).hasSize(2);
+    }
+
+    @Test
+    @DisplayName("게시글을 정상적으로 수정한다.")
+    void update_article() {
+        Article article = new Article(articleRequestDto.getAuthor(),
+                articleRequestDto.getTitle(), articleRequestDto.getContents());
+        given(articleRepository.findById((any()))).willReturn(Optional.of(article));
+
+        String updatedTitle = "Bye";
+        String updatedContents = "Have a nice day";
+        ArticleRequestDto updateRequestDto = new ArticleRequestDto("park", updatedTitle, updatedContents);
+        articleService.update(ARTICLE_ID, updateRequestDto);
+
+        assertThat(article.getTitle()).isEqualTo(updatedTitle);
+        assertThat(article.getContents()).isEqualTo(updatedContents);
+    }
+
+    @Test
+    @DisplayName("게시글을 정상적으로 삭제한다.")
+    void delete_article() {
+        Article article = new Article(articleRequestDto.getAuthor(),
+                articleRequestDto.getTitle(), articleRequestDto.getContents());
+        given(articleRepository.findById((any()))).willReturn(Optional.of(article));
+
+        articleService.delete(ARTICLE_ID);
+
+        verify(articleRepository).delete(article);
     }
 }
