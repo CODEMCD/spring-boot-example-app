@@ -1,18 +1,53 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        <v-app-bar app color="#64B587" dark>
+            <v-toolbar-title>My Board</v-toolbar-title>
+        </v-app-bar>
+
+        <v-content>
+
+        </v-content>
+
+        <v-bottom-navigation
+                v-model="bottomNav"
+                grow
+        >
+            <v-btn v-on:click="goHome">
+                <span>홈</span>
+                <v-icon>mdi-home</v-icon>
+            </v-btn>
+
+            <v-btn v-on:click="goWriteArticle">
+                <span>글쓰기</span>
+                <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+
+            <v-btn v-on:click="goUserMenu">
+                <span>내 정보</span>
+                <v-icon>mdi-account</v-icon>
+            </v-btn>
+        </v-bottom-navigation>
+    </div>
 </template>
 
 <script>
-    // @ is an alias to /src
-    import HelloWorld from '@/components/HelloWorld.vue'
-
     export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
+        name: 'home',
+        components: {},
+        data: () => ({
+            bottomNav: 'recent',
+        }),
+        methods: {
+            goHome: function() {
+              this.$router.push('/');
+            },
+            goWriteArticle: function() {
+                this.$router.push('/articles/write');
+            },
+            goUserMenu: function() {
+                // TODO: 로그인 전이면 '/login', 로그인 후이면 '/users/{userId}' 로 변경하기
+                this.$router.push('/login');
+            }
+        }
+    }
 </script>
