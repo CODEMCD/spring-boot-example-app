@@ -3,17 +3,7 @@
         <AppBar/>
 
         <v-content>
-            <v-container>
-                <v-row>
-                    <MarkdownEditor/>
-                </v-row>
-                <v-row>
-                    <v-col class="text-center">
-                        <v-btn min-width="50%" color="#64B587">작성 완료</v-btn>
-                        <v-btn min-width="50%" color="#64B587">취소</v-btn>
-                    </v-col>
-                </v-row>
-            </v-container>
+            <MarkdownEditor v-on:passArticle="requestSaveArticle"/>
         </v-content>
 
         <BottomNav/>
@@ -21,9 +11,10 @@
 </template>
 
 <script>
+    import axios from 'axios';
     import AppBar from '../components/MainAppBar.vue';
     import BottomNav from '../components/MainBottomNavigation.vue';
-    import MarkdownEditor from "../components/MarkdownEditor.vue";
+    import MarkdownEditor from "../components/ArticleMarkdownEditor.vue";
 
     export default {
         name: 'writingArticle',
@@ -33,5 +24,25 @@
             MarkdownEditor
         },
         data: () => ({}),
+        methods: {
+            requestSaveArticle: function(article) {
+                const currentVue = this;
+                console.log(article);
+                const articleRequestDto = {
+                    author: "park",
+                    title: article.title,
+                    contents: article.contents
+                };
+
+                axios.post('/api/articles', articleRequestDto).then(function(response) {
+                    console.log(response);
+                    if (response.status === 200) {
+                        currentVue.$router.push('/');
+                    }
+                }).catch(function(error) {
+                    console.log(error);
+                })
+            }
+        }
     }
 </script>

@@ -22,5 +22,8 @@
         },
         data: () => ({
         }),
+        created: {
+
+        },
     }
 </script>
