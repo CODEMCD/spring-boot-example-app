@@ -3,7 +3,7 @@
         <v-bottom-navigation
                 v-model="bottomNav"
                 grow
-                absolute
+                app
         >
             <v-btn v-on:click="goHome">
                 <span>홈</span>
