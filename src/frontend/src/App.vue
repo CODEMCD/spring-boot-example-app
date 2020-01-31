@@ -1,15 +1,23 @@
 <template>
-  <v-app>
-    <router-view/>
-  </v-app>
+    <v-app>
+        <RwvHeader/>
+        <router-view/>
+        <RwvFooter/>
+    </v-app>
 </template>
 
 <script>
-  export default {
-    name: 'App',
-    data () {
-      return {
-      }
+    import RwvHeader from "./components/TheHeader";
+    import RwvFooter from "./components/TheFooter"
+
+    export default {
+        name: 'App',
+        components: {
+            RwvHeader,
+            RwvFooter
+        },
+        data() {
+            return {}
+        }
     }
-  }
 </script>

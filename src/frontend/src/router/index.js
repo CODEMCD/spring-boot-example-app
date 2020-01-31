@@ -6,14 +6,14 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
     name: 'home',
+    path: '/',
     component: Home
   },
   {
-    path: '/articles/write',
     name: 'writeArticle',
-    component: () => import('../views/WritingArticle.vue')
+    path: '/articles/write',
+    component: () => import('../views/ArticleEdit.vue')
   },
 ];
 
