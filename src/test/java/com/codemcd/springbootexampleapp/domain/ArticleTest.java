@@ -1,4 +1,4 @@
-package com.codemcd.springbootvuejsweb.domain;
+package com.codemcd.springbootexampleapp.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

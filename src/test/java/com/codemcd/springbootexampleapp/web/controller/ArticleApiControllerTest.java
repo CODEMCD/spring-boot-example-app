@@ -1,7 +1,7 @@
-package com.codemcd.springbootvuejsweb.web.controller;
+package com.codemcd.springbootexampleapp.web.controller;
 
-import com.codemcd.springbootvuejsweb.service.dto.ArticleRequestDto;
-import com.codemcd.springbootvuejsweb.service.dto.ArticleResponseDto;
+import com.codemcd.springbootexampleapp.service.dto.ArticleRequestDto;
+import com.codemcd.springbootexampleapp.service.dto.ArticleResponseDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

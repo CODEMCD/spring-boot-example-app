@@ -1,4 +1,4 @@
-package com.codemcd.springbootvuejsweb;
+package com.codemcd.springbootexampleapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

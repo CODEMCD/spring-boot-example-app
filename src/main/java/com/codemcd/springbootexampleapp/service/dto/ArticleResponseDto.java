@@ -1,4 +1,4 @@
-package com.codemcd.springbootvuejsweb.service.dto;
+package com.codemcd.springbootexampleapp.service.dto;
 
 public class ArticleResponseDto {
     private Long id;

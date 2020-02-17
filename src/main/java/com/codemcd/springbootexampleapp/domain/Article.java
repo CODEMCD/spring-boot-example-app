@@ -1,4 +1,4 @@
-package com.codemcd.springbootvuejsweb.domain;
+package com.codemcd.springbootexampleapp.domain;
 
 import javax.persistence.*;
 import java.util.Objects;

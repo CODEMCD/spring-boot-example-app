@@ -1,9 +1,9 @@
-package com.codemcd.springbootvuejsweb.service;
+package com.codemcd.springbootexampleapp.service;
 
-import com.codemcd.springbootvuejsweb.domain.Article;
-import com.codemcd.springbootvuejsweb.domain.ArticleRepository;
-import com.codemcd.springbootvuejsweb.service.dto.ArticleRequestDto;
-import com.codemcd.springbootvuejsweb.service.dto.ArticleResponseDto;
+import com.codemcd.springbootexampleapp.domain.Article;
+import com.codemcd.springbootexampleapp.domain.ArticleRepository;
+import com.codemcd.springbootexampleapp.service.dto.ArticleRequestDto;
+import com.codemcd.springbootexampleapp.service.dto.ArticleResponseDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,8 +1,8 @@
-package com.codemcd.springbootvuejsweb.web.controller;
+package com.codemcd.springbootexampleapp.web.controller;
 
-import com.codemcd.springbootvuejsweb.service.ArticleService;
-import com.codemcd.springbootvuejsweb.service.dto.ArticleRequestDto;
-import com.codemcd.springbootvuejsweb.service.dto.ArticleResponseDto;
+import com.codemcd.springbootexampleapp.service.ArticleService;
+import com.codemcd.springbootexampleapp.service.dto.ArticleRequestDto;
+import com.codemcd.springbootexampleapp.service.dto.ArticleResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
